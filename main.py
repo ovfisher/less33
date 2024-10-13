@@ -21,4 +21,5 @@ while running:
     running = False
 
 print('hi git')
+print('hi git')
 pygame.quit()
