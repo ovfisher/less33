@@ -28,6 +28,14 @@ while running:
                 target_y = random.randint(0, SCREEN_HEGHT - target_height)
 
     screen.blit(target_image, (target_x,target_y))
+    target_y += target_y
+    target_x += target_x
+    if target_y >= SCREEN_HEGHT - target_height:
+        target_y = target_height
+    if target_x >= SCREEN_WIDTH - target_width:
+        target_x = target_width
+#    pygame.time.delay(800)
     pygame.display.update()
+    pygame.time.delay(800)
 
 pygame.quit()
