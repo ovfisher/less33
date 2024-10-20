@@ -1,3 +1,5 @@
+from turtledemo.nim import SCREENWIDTH
+
 import pygame
 import random
 
@@ -15,6 +17,11 @@ target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0,SCREEN_HEGHT - target_height)
 color = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
 
+def sign() :
+    k = random.randint(0,1)
+    result = 2 * k - 1
+    return result
+
 running = True
 while running:
     screen.fill(color)
@@ -28,14 +35,27 @@ while running:
                 target_y = random.randint(0, SCREEN_HEGHT - target_height)
 
     screen.blit(target_image, (target_x,target_y))
-    target_y += target_y
-    target_x += target_x
-    if target_y >= SCREEN_HEGHT - target_height:
+# инкремент координат с проверкой и затем задержка на 800 мл сек
+# получаем почти движение цели
+#    target_y += target_y
+#    target_x += target_x
+#   target_y += random.randint(1, 20)
+#   target_x += random.randint(1, 20)
+
+    target_y = target_y + sign() * random.randint(1, 30)
+    target_x = target_x + sign() * random.randint(1, 30)
+    if target_y < target_height :
+        target_y = SCREEN_HEGHT - target_height
+    elif target_y > SCREEN_HEGHT - target_height :
         target_y = target_height
-    if target_x >= SCREEN_WIDTH - target_width:
+
+    if target_width > target_x :
+        target_x = SCREEN_WIDTH - target_width
+    elif target_x > SCREEN_WIDTH - target_width:
         target_x = target_width
+
 #    pygame.time.delay(800)
     pygame.display.update()
-    pygame.time.delay(800)
+    pygame.time.delay(100)
 
 pygame.quit()
